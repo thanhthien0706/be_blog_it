@@ -1,10 +1,11 @@
-import { Request, Response } from "express";
+import express from "express";
 import { Express } from "express-serve-static-core";
+const router = express.Router();
 
-import ReponseObject from "../entities/ReponseObject";
+import AuthRouter from "./api/Auth.route";
+
+router.use("/auth", AuthRouter);
 
 export default function route(app: Express) {
-  app.use("/", (req: Request, res: Response) => {
-    res.status(200).json(new ReponseObject(true, "oke", {}));
-  });
+  app.use("/api", router);
 }
